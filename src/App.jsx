@@ -70,15 +70,15 @@ const s = {
 export default function App() {
   const [screen, setScreen] = useState('today');
   const [tasks, setTasks] = useState(() => {
-    const saved = load('hitotsu_tasks', []);
+    const saved = load('tanuki_tasks', []);
     // 起動時に繰り返しタスクを生成
     const toAdd = generateRepeatTasks(saved);
     if (toAdd.length === 0) return saved;
     const next = [...saved, ...toAdd];
-    save('hitotsu_tasks', next);
+    save('tanuki_tasks', next);
     return next;
   });
-  const [templates, setTemplates] = useState(() => load('hitotsu_templates', defaultTemplates));
+  const [templates, setTemplates] = useState(() => load('tanuki_templates', defaultTemplates));
   const [showAddSheet, setShowAddSheet] = useState(false);
   const [showSkipDialog, setShowSkipDialog] = useState(false);
   const [showLaterDialog, setShowLaterDialog] = useState(false);
@@ -98,8 +98,8 @@ export default function App() {
   const currentTask = pendingTasks[0] || null;
   const unboxCount = tomorrowTasks.length + unboxTasks.length;
 
-  const saveTasks = (next) => { setTasks(next); save('hitotsu_tasks', next); };
-  const saveTemplates = (next) => { setTemplates(next); save('hitotsu_templates', next); };
+  const saveTasks = (next) => { setTasks(next); save('tanuki_tasks', next); };
+  const saveTemplates = (next) => { setTemplates(next); save('tanuki_templates', next); };
 
   // 通常タスク追加
   const addTask = (title, repeatType = 'none', repeatWeekdays = []) => {
@@ -220,7 +220,7 @@ function TodayScreen({ todayTasks, yesterdayTasks, onAddTask, onAddTaskFromTempl
     <div style={s.screen}>
       <div style={s.appbar}>
         <div>
-          <div style={{ fontSize:22, fontWeight:700, color:C.text, letterSpacing:-0.3 }}>Hitotsu</div>
+          <div style={{ fontSize:22, fontWeight:700, color:C.text, letterSpacing:-0.3 }}>Tanuki</div>
           <div style={{ fontSize:13, color:C.sub, marginTop:2 }}>{todayLabel()}</div>
         </div>
         <div style={{ display:'flex', alignItems:'center', gap:4 }}>
@@ -590,4 +590,3 @@ function Dialog({ title, message, actions }) {
     </div>
   );
 }
-
